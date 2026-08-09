@@ -1,4 +1,4 @@
 echo "BUILD START"
-pip install -r requirements.txt --break-system-packages
-python manage.py collectstatic --noinput --clear
+python3.12 -m pip install -r requirements.txt
+python3.12 manage.py collectstatic --noinput
 echo "BUILD END"
