@@ -4,3 +4,5 @@ pillow==12.1.0
 sqlparse==0.5.5
 tzdata==2025.3
 whitenoise==6.8.0
+dj-database-url==2.1.0
+psycopg[binary]
