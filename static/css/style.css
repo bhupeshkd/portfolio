@@ -2583,7 +2583,10 @@ html[data-theme="dark"] .icon-django i {
 
 .detail-hero-image img {
     width: 100%;
+    max-width: 100%;
+    height: auto;
     display: block;
+    object-fit: cover;
 }
 
 .detail-container {
