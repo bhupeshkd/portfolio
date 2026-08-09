@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% if site_profile %}{{ site_profile.name }} – {{ site_profile.title }}.{% else %}Bhupesh Dewangan – Python & Django Developer. Building scalable backend systems and stunning web experiences.{% endif %}">
+    <meta name="keywords" content="{{ site_profile.name|default:'Bhupesh' }}, Django Developer, Python Developer, Portfolio">
+    <meta property="og:title" content="{{ site_profile.name|default:'Bhupesh Dewangan' }} | Portfolio">
+    <meta property="og:description" content="{{ site_profile.title|default:'Python & Django Developer building scalable web applications.' }}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{% static 'images/og-image.png' %}">
+    <title>{% block title %}{{ site_profile.name|default:'Bhupesh Dewangan' }} | Portfolio{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- AOS (Animate On Scroll) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <!-- Swiper CSS for carousels -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- Three.js for 3D - loaded only on homepage -->
+    {% block extra_head %}{% endblock %}
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templates.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <!-- Skip to content (accessibility) -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+    <!-- ========== Preloader ========== -->
+    <div class="preloader" id="preloader">
+        <div class="loader-3d">
+            <div class="cube">
+                <div class="cube-face cube-front"></div>
+                <div class="cube-face cube-back"></div>
+                <div class="cube-face cube-right"></div>
+                <div class="cube-face cube-left"></div>
+                <div class="cube-face cube-top"></div>
+                <div class="cube-face cube-bottom"></div>
+            </div>
+        </div>
+        <p class="loader-text">Loading Portfolio...</p>
+    </div>
+
+    <!-- ========== Custom Cursor ========== -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="custom-cursor-dot" id="customCursorDot"></div>
+
+    <!-- ========== Announcement Bar ========== -->
+    <div class="announcement-bar">
+        <p>🚀 {% if site_profile and site_profile.available %}{{ site_profile.available_text|default:'Available for work' }}{% else %}Available for freelance{% endif %} — <a href="{% url 'contact' %}">Let's talk</a></p>
+    </div>
+
+    <!-- ========== Navbar ========== -->
+    <nav class="modern-navbar" id="navbar">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="nav-logo">
+                <span class="logo-bracket"><</span>
+                <span class="logo-name">{{ site_profile.name|default:'Bhupesh'|truncatechars:8 }}</span>
+                <span class="logo-bracket">/></span>
+            </a>
+
+            <ul class="nav-links">
+                <li>
+                    <a href="{% url 'home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'projects' %}" class="nav-link {% if request.resolver_match.url_name == 'projects' %}active{% endif %}">
+                        <i class="fas fa-code"></i> Projects
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'resume' %}" class="nav-link {% if request.resolver_match.url_name == 'resume' %}active{% endif %}">
+                        <i class="fas fa-file-alt"></i> Resume
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Theme Switch -->
+                <label class="theme-switch" title="Toggle dark mode">
+                    <input type="checkbox" id="theme-toggle-checkbox">
+                    <span class="slider">
+                        <i class="fas fa-sun theme-icon-sun"></i>
+                        <i class="fas fa-moon theme-icon-moon"></i>
+                    </span>
+                </label>
+
+                <!-- Hire Me Button -->
+                <a href="{% url 'contact' %}" class="nav-hire-btn">
+                    <span class="dot-indicator"></span>
+                    Hire Me
+                </a>
+
+                <!-- Hamburger -->
+                <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="{% url 'home' %}" class="mobile-link">Home</a></li>
+            <li><a href="{% url 'projects' %}" class="mobile-link">Projects</a></li>
+            <li><a href="{% url 'resume' %}" class="mobile-link">Resume</a></li>
+            <li><a href="{% url 'contact' %}" class="mobile-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ========== Footer ========== -->
+    <footer class="modern-footer">
+        <div class="footer-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.82,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3><span class="logo-bracket"><</span>{{ site_profile.name|default:'Bhupesh' }}<span class="logo-bracket">/></span></h3>
+                    <p>{{ site_profile.title|default:'Python & Django Developer crafting scalable, elegant web solutions with passion for clean code.' }}</p>
+                    <div class="footer-socials">
+                        {% if site_profile.github_url %}<a href="{{ site_profile.github_url }}" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>{% endif %}
+                        {% if site_profile.linkedin_url %}<a href="{{ site_profile.linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>{% endif %}
+                        {% if site_profile.email %}<a href="mailto:{{ site_profile.email }}" aria-label="Email"><i class="fas fa-envelope"></i></a>{% endif %}
+                        {% if site_profile.twitter_url %}<a href="{{ site_profile.twitter_url }}" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>{% endif %}
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'projects' %}">Projects</a></li>
+                        <li><a href="{% url 'resume' %}">Resume</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Get In Touch</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> {{ site_profile.location|default:'Chhattisgarh, India' }}</p>
+                    <p><i class="fas fa-envelope"></i> {{ site_profile.email|default:'bhupeshdeww@gmail.com' }}</p>
+                    <p><i class="fas fa-clock"></i> {% if site_profile.available %}Available for work{% else %}Currently busy{% endif %}</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} {{ site_profile.name|default:'Bhupesh Dewangan' }}. Built with <i class="fas fa-heart"></i> & Django.</p>
+                <button class="back-to-top" id="backToTop" title="Back to top"><i class="fas fa-arrow-up"></i></button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ========== Scripts ========== -->
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Swiper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Typed.js for typing effects -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.umd.js"></script>
+    <!-- Vanilla Tilt -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="{% static 'js/main.js' %}" defer></script>
+    <script src="{% static 'js/theme.js' %}" defer></script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

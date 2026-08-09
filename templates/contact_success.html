@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Message Sent | Bhupesh Dewangan{% endblock %}
+
+{% block content %}
+<section class="success-page">
+    <div class="success-container" data-aos="zoom-in">
+        <div class="success-checkmark">
+            <div class="checkmark-circle">
+                <div class="checkmark-stem"></div>
+                <div class="checkmark-kick"></div>
+            </div>
+        </div>
+        <h1 class="gradient-text">Message Sent!</h1>
+        <p>Thank you for reaching out. I'll get back to you within 24-48 hours.</p>
+        <div class="success-actions">
+            <a href="{% url 'home' %}" class="btn-3d primary-btn">
+                <span class="btn-front"><i class="fas fa-home"></i> Back to Home</span>
+            </a>
+            <a href="{% url 'projects' %}" class="btn-3d secondary-btn">
+                <span class="btn-front"><i class="fas fa-code"></i> View Projects</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

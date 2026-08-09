@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Page Not Found - Bhupesh Dewangan{% endblock %}
+
+{% block content %}
+<section class="page-404">
+    <div class="container-404">
+        <div class="glitch-404">
+            <span class="glitch-number" data-text="404">404</span>
+        </div>
+        <div class="terminal-404" data-aos="fade-up" data-aos-delay="200">
+            <div class="terminal-bar">
+                <span class="window-dot red"></span>
+                <span class="window-dot yellow"></span>
+                <span class="window-dot green"></span>
+                <span class="window-title">error.py</span>
+            </div>
+            <div class="terminal-body">
+                <p><span class="prompt">$</span> <span class="cmd">python</span> run_server.py</p>
+                <p class="error-line"><i class="fas fa-exclamation-triangle"></i> Http404: Page not found</p>
+                <p class="error-detail">The URL you requested doesn't exist on this server.</p>
+                <p class="error-detail">Maybe the page was moved, deleted, or you typed the URL wrong.</p>
+                <p class="cursor-line"><span class="prompt">$</span> <span class="cursor-block"></span></p>
+            </div>
+        </div>
+        <div class="actions-404" data-aos="fade-up" data-aos-delay="400">
+            <a href="{% url 'home' %}" class="btn-3d primary-btn">
+                <span class="btn-front"><i class="fas fa-home"></i> Back to Home</span>
+            </a>
+            <a href="{% url 'contact' %}" class="btn-3d secondary-btn">
+                <span class="btn-front"><i class="fas fa-envelope"></i> Contact</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

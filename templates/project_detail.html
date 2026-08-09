@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ project.title }} | Bhupesh Dewangan{% endblock %}
+
+{% block content %}
+<section class="project-detail-page">
+    {% if project.image %}
+    <div class="detail-hero-image" data-aos="zoom-in">
+        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+    </div>
+    {% endif %}
+    <div class="detail-container" data-aos="fade-up">
+        <span class="section-tag">// project</span>
+        <h1 class="detail-title">{{ project.title }}</h1>
+        <span class="category-badge">{{ project.get_category_display }}</span>
+        <p class="detail-desc">{{ project.description }}</p>
+        <div class="detail-tech">
+            {% for tech in project.technologies.all %}
+            <span class="tech-tag">{{ tech.name }}</span>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

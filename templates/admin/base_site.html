@@ -1,0 +1,143 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrastyle %}
+<style>
+    :root {
+        --admin-primary: #6366f1;
+        --admin-dark: #1e293b;
+        --admin-darker: #0f172a;
+        --admin-accent: #10b981;
+        --admin-warn: #f59e0b;
+        --admin-danger: #ef4444;
+    }
+
+    /* Header branding */
+    #header {
+        background: linear-gradient(135deg, var(--admin-darker) 0%, var(--admin-dark) 100%);
+        border-bottom: 3px solid var(--admin-primary);
+    }
+    #branding h1, #branding h1 a:link, #branding h1 a:visited {
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+    #user-tools a {
+        color: #c7d2fe;
+    }
+    #user-tools a:hover {
+        color: #fff;
+    }
+
+    /* Module headers */
+    .module h2, .module caption, .inline-group h2 {
+        background: linear-gradient(90deg, var(--admin-primary) 0%, #8b5cf6 100%);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    /* Buttons */
+    .button, input[type=submit], input[type=button], .submit-row input, a.button {
+        background: var(--admin-primary);
+        font-weight: 600;
+        border-radius: 6px;
+        padding: 8px 16px;
+        transition: all 0.2s ease;
+    }
+    .button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover, a.button:hover {
+        background: #4f46e5;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+    .button.default, input[type=submit].default, .submit-row input.default {
+        background: var(--admin-accent);
+    }
+    .button.default:hover, input[type=submit].default:hover, .submit-row input.default:hover {
+        background: #059669;
+    }
+
+    /* Card-like module containers */
+    .module {
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+    }
+
+    /* Links in table */
+    #result_list a {
+        color: var(--admin-primary);
+    }
+
+    /* Selected rows */
+    tr.selected td {
+        background: #eef2ff !important;
+    }
+
+    /* Filters */
+    #changelist-filter {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0 !important;
+    }
+    #changelist-filter h2 {
+        background: var(--admin-dark) !important;
+        color: white !important;
+    }
+    #changelist-filter li.selected a {
+        color: var(--admin-primary) !important;
+    }
+
+    /* Search bar */
+    #searchbar {
+        border-radius: 8px !important;
+        border: 2px solid #e2e8f0 !important;
+        padding: 8px 12px !important;
+    }
+    #searchbar:focus {
+        border-color: var(--admin-primary) !important;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    /* Pagination */
+    .paginator {
+        border-top: 1px solid #e2e8f0;
+    }
+    .paginator a, .paginator span {
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+
+    /* Success/error messages */
+    .messagelist li.success {
+        background: #ecfdf5;
+        border-left: 4px solid var(--admin-accent);
+    }
+    .messagelist li.error {
+        background: #fef2f2;
+        border-left: 4px solid var(--admin-danger);
+    }
+
+    /* Responsive improvements */
+    @media (max-width: 1024px) {
+        #header {
+            padding: 12px;
+        }
+        #branding h1 {
+            font-size: 20px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <span style="color: #a5b4fc; font-weight: 800;"></></span>
+        Portfolio Admin
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

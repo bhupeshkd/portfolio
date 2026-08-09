@@ -1,0 +1,443 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home | {{ site_profile.name|default:'Bhupesh Dewangan' }}{% endblock %}
+
+{% block extra_head %}
+<!-- Three.js for 3D particles -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<!-- ========== 3D Particle Canvas Background ========== -->
+<div id="particles-3d"></div>
+
+<!-- ========== HERO SECTION ========== -->
+<section class="hero-section">
+    <div class="hero-background">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="grid-overlay"></div>
+    </div>
+
+    <div class="hero-container">
+        <div class="hero-left" data-aos="fade-right" data-aos-duration="1000">
+            <div class="hero-badge typing-badge">
+                <span class="badge-pulse"></span>
+                <span class="typed-roles" id="typed-badge">{% if profile and profile.available %}{{ profile.available_text|default:'Available for work' }}{% else %}Open to opportunities{% endif %}</span>
+            </div>
+
+            <h1 class="hero-title">
+                <span class="hero-greet">Hi, I'm</span>
+                <span class="hero-name">{{ profile.name|default:'Bhupesh' }} <span class="gradient-text">{{ profile.name|default:'Dewangan' }}</span></span>
+            </h1>
+
+            <h2 class="hero-role">
+                <span class="prefix">>_</span>
+                <span id="typed-text"></span><span class="cursor-blink">|</span>
+            </h2>
+
+            <p class="hero-desc">
+                {% if profile.about_text %}
+                {{ profile.about_text|truncatechars:200 }}
+                {% else %}
+                I build <span class="highlight">scalable backend systems</span>, production-ready 
+                <span class="highlight">RESTful APIs</span>, and immersive web experiences using 
+                <span class="accent-text">Django</span> & <span class="accent-text">Python</span>.
+                {% endif %}
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{% url 'projects' %}" class="btn-3d primary-btn">
+                    <span class="btn-front"><i class="fas fa-rocket"></i> View Projects</span>
+                </a>
+                <a href="{% url 'resume' %}" class="btn-3d secondary-btn">
+                    <span class="btn-front"><i class="fas fa-file-download"></i> Download CV</span>
+                </a>
+                <a href="{% url 'contact' %}" class="btn-3d ghost-btn">
+                    <span class="btn-front"><i class="fas fa-paper-plane"></i> Contact</span>
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="{{ total_projects|default:'3' }}">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Projects Shipped</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="{{ total_skills|default:'8' }}">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Technologies</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="{{ total_experience_years|default:'2' }}">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Years Coding</span>
+                </div>
+            </div>
+
+            <div class="hero-socials">
+                {% if profile.github_url %}<a href="{{ profile.github_url }}" target="_blank" rel="noopener" class="social-3d" aria-label="GitHub"><i class="fab fa-github"></i></a>{% endif %}
+                {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener" class="social-3d" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>{% endif %}
+                {% if profile.email %}<a href="mailto:{{ profile.email }}" class="social-3d" aria-label="Email"><i class="fas fa-envelope"></i></a>{% endif %}
+                {% if profile.twitter_url %}<a href="{{ profile.twitter_url }}" target="_blank" rel="noopener" class="social-3d" aria-label="Twitter"><i class="fab fa-twitter"></i></a>{% endif %}
+            </div>
+        </div>
+
+        <div class="hero-right" data-aos="zoom-in" data-aos-duration="1200">
+            <!-- Profile Picture 3D Card -->
+            <div class="code-card-3d tilt-3d hero-profile-card" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.3">
+                <div class="code-card-header">
+                    <span class="window-dot red"></span>
+                    <span class="window-dot yellow"></span>
+                    <span class="window-dot green"></span>
+                    <span class="window-title">developer.py</span>
+                </div>
+                <div class="code-card-body">
+                    {% if profile and profile.profile_picture %}
+                    <div class="hero-profile-pic">
+                        <img src="{{ profile.profile_picture.url }}" alt="{{ profile.name }}" onerror="this.style.display='none'">
+                    </div>
+                    {% endif %}
+                    <pre><code><span class="code-keyword">class</span> <span class="code-class">Developer</span>:
+    <span class="code-keyword">def</span> <span class="code-func">__init__</span>(self):
+        self.name = <span class="code-string">"{{ profile.name|default:'Bhupesh' }}"</span>
+        self.role = <span class="code-string">"{% for s in skills|slice:':3' %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% endfor %}"</span>
+        self.skills = [
+{% for s in skills|slice:':6' %}
+            <span class="code-string">"{{ s.name }}"</span>{% if not forloop.last %},{% endif %}
+{% endfor %}
+        ]
+    
+    <span class="code-keyword">def</span> <span class="code-func">build</span>(self, idea):
+        <span class="code-string">"""Turn ideas into reality"""</span>
+        <span class="code-keyword">return</span> <span class="code-string">"scalable_app"</span></code></pre>
+                </div>
+                <div class="code-card-footer">
+                    <span class="cursor-block"></span> <span class="footer-text">bhupesh@portfolio:~$</span>
+                </div>
+            </div>
+
+            <!-- Floating tech icons -->
+            {% for skill in skills|slice:':5' %}
+            <div class="floating-icon icon-{{ forloop.counter }}" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:2 }}00"><i class="{{ skill.icon|default:'fas fa-code' }}"></i></div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="scroll-indicator">
+        <div class="mouse">
+            <div class="wheel"></div>
+        </div>
+        <span>Scroll to explore</span>
+    </div>
+</section>
+
+<!-- ========== SKILLS SECTION ========== -->
+<section class="skills-section" id="skills">
+    <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">// what I know</span>
+        <h2 class="section-title">Technical <span class="gradient-text">Skills</span></h2>
+        <div class="section-line"><span></span></div>
+    </div>
+
+    <div class="skills-wrapper">
+        <div class="skills-grid">
+            {% if skills %}
+                <!-- Backend -->
+                <div class="skill-3d-card" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600" data-tilt data-tilt-max="10">
+                    <div class="skill-icon" style="--skill-color: #6366f1;"><i class="fab fa-python"></i></div>
+                    <h3>Backend</h3>
+                    <div class="skill-tags">
+                        {% for s in skills %}
+                            {% if s.category == 'backend' %}<span>{{ s.name }}</span>{% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Frontend -->
+                <div class="skill-3d-card" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600" data-tilt data-tilt-max="10">
+                    <div class="skill-icon" style="--skill-color: #61dafb;"><i class="fab fa-html5"></i></div>
+                    <h3>Frontend</h3>
+                    <div class="skill-tags">
+                        {% for s in skills %}
+                            {% if s.category == 'frontend' %}<span>{{ s.name }}</span>{% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Databases -->
+                <div class="skill-3d-card" data-aos="fade-up" data-aos-delay="300" data-aos-duration="600" data-tilt data-tilt-max="10">
+                    <div class="skill-icon" style="--skill-color: #f59e0b;"><i class="fas fa-database"></i></div>
+                    <h3>Databases</h3>
+                    <div class="skill-tags">
+                        {% for s in skills %}
+                            {% if s.category == 'database' %}<span>{{ s.name }}</span>{% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Tools -->
+                <div class="skill-3d-card" data-aos="fade-up" data-aos-delay="400" data-aos-duration="600" data-tilt data-tilt-max="10">
+                    <div class="skill-icon" style="--skill-color: #10b981;"><i class="fas fa-tools"></i></div>
+                    <h3>Tools & Libraries</h3>
+                    <div class="skill-tags">
+                        {% for s in skills %}
+                            {% if s.category == 'tools' %}<span>{{ s.name }}</span>{% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="skill-3d-card" data-aos="fade-up" data-aos-duration="600" data-tilt data-tilt-max="10">
+                    <div class="skill-icon" style="--skill-color: #f7df1e;"><i class="fab fa-python"></i></div>
+                    <h3>Backend</h3>
+                    <div class="skill-tags"><span>Python</span><span>Django</span><span>DRF</span></div>
+                </div>
+                <div class="skill-3d-card" data-aos="fade-up" data-aos-delay="100" data-aos-duration="600" data-tilt data-tilt-max="10">
+                    <div class="skill-icon" style="--skill-color: #61dafb;"><i class="fab fa-react"></i></div>
+                    <h3>Frontend</h3>
+                    <div class="skill-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Tech Orb visualization -->
+        <div class="tech-orbit-3d" data-aos="zoom-in" data-aos-delay="200">
+            <div class="orbit-container">
+                <div class="orbit-core"><i class="fab fa-python"></i></div>
+                <div class="orbit-ring ring-1"></div>
+                <div class="orbit-ring ring-2"></div>
+                <div class="orbit-ring ring-3"></div>
+                {% for skill in skills|slice:':6' %}
+                <div class="orbit-item o{{ forloop.counter }}"><i class="{{ skill.icon|default:'fas fa-code' }}"></i></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PROJECTS TEASER ========== -->
+<section class="projects-teaser">
+    <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">// recent work</span>
+        <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+        <div class="section-line"><span></span></div>
+    </div>
+
+    <div class="featured-projects">
+        {% for project in featured_projects %}
+        <article class="project-3d-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
+            <div class="p-card-inner">
+                {% if project.image %}
+                <div class="p-card-image">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" onerror="this.src='{% static 'images/profile.jpeg' %}'">
+                    <div class="p-card-overlay"></div>
+                </div>
+                {% endif %}
+                <div class="p-card-body">
+                    <span class="p-category">{{ project.get_category_display }}</span>
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.description|truncatechars:120 }}</p>
+                    <div class="p-tech-tags">
+                        {% for tech in project.technologies.all|slice:":4" %}
+                        <span>#{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="p-card-links">
+                        <a href="{% url 'project_detail' project.slug %}" class="p-link"><i class="fas fa-eye"></i> View Project</a>
+                        {% if project.github_link %}
+                        <a href="{{ project.github_link }}" target="_blank" rel="noopener" class="p-link"><i class="fab fa-github"></i></a>
+                        {% endif %}
+                        {% if project.live_link %}
+                        <a href="{{ project.live_link }}" target="_blank" rel="noopener" class="p-link"><i class="fas fa-external-link-alt"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </article>
+        {% empty %}
+        <div class="no-projects-animated" data-aos="zoom-in">
+            <div class="empty-box"><i class="fas fa-laptop-code"></i></div>
+            <h3>Projects coming soon!</h3>
+            <p>I'm constantly working on new ideas. Check back soon!</p>
+            <a href="{% url 'contact' %}" class="btn-3d primary-btn"><span class="btn-front">Get in touch</span></a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="view-all-btn" data-aos="zoom-in">
+        <a href="{% url 'projects' %}" class="btn-3d secondary-btn">
+            <span class="btn-front"><i class="fas fa-arrow-right"></i> View All Projects</span>
+        </a>
+    </div>
+</section>
+
+<!-- ========== ABOUT SECTION ========== -->
+<section class="about-section">
+    <div class="section-header" data-aos="fade-up">
+        <span class="section-tag">// about me</span>
+        <h2 class="section-title">Who <span class="gradient-text">I Am</span></h2>
+        <div class="section-line"><span></span></div>
+    </div>
+
+    <div class="about-grid">
+        <div class="about-visual" data-aos="zoom-in">
+            <div class="profile-3d-frame tilt-3d" data-tilt data-tilt-max="10">
+                <div class="profile-glow"></div>
+                {% if profile and profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" alt="{{ profile.name }}">
+                {% else %}
+                <img src="{% static 'images/profile.jpeg' %}" alt="{{ profile.name|default:'Bhupesh Dewangan' }}">
+                {% endif %}
+                <div class="profile-badge">
+                    <i class="fas fa-code"></i>
+                    <span>Coding since 2020</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-content" data-aos="fade-left" data-aos-delay="200">
+            <h3>{{ profile.title|default:'Python & Django Developer based in India' }} 🌏</h3>
+            <p>
+                {% if profile.about_text %}
+                {{ profile.about_text }}
+                {% else %}
+                I'm passionate about turning complex problems into elegant, scalable solutions. 
+                My journey in software development started with Python and evolved into building 
+                full-stack Django applications.
+                {% endif %}
+            </p>
+
+            <div class="about-points">
+                <div class="point-3d" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-server"></i>
+                    <div><h4>Backend Architecture</h4><p>Designing scalable Django applications</p></div>
+                </div>
+                <div class="point-3d" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-rocket"></i>
+                    <div><h4>Production-Ready</h4><p>Building apps that perform in real world</p></div>
+                </div>
+                <div class="point-3d" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-graduation-cap"></i>
+                    <div><h4>Continuous Learner</h4><p>Always exploring new technologies</p></div>
+                </div>
+            </div>
+
+            <a href="{% url 'resume' %}" class="btn-3d primary-btn">
+                <span class="btn-front"><i class="fas fa-file-alt"></i> Learn More</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CONTACT CTA ========== -->
+<section class="cta-section">
+    <div class="cta-3d-container" data-aos="zoom-in">
+        <div class="cta-glow"></div>
+        <h2>Have a project in mind?</h2>
+        <p>Let's build something amazing together. I'm always open to discussing new opportunities.</p>
+        <div class="cta-buttons">
+            <a href="{% url 'contact' %}" class="btn-3d primary-btn">
+                <span class="btn-front"><i class="fas fa-paper-plane"></i> Get In Touch</span>
+            </a>
+            <a href="mailto:{% if profile %}{{ profile.email }}{% else %}bhupeshdeww@gmail.com{% endif %}" class="btn-3d ghost-btn">
+                <span class="btn-front"><i class="fas fa-envelope"></i> Email Me</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize Typed.js for hero roles
+    if (typeof Typed !== 'undefined') {
+        new Typed('#typed-text', {
+            strings: [
+                'Python Developer',
+                'Django Developer',
+                'Backend Engineer',
+                'Full-Stack Developer',
+                'API Designer'
+            ],
+            typeSpeed: 60,
+            backSpeed: 40,
+            startDelay: 500,
+            backDelay: 1500,
+            loop: true,
+            showCursor: false
+        });
+
+        new Typed('#typed-badge', {
+            strings: [
+                'Available for work',
+                'Open to collaboration',
+                'Freelance ready'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            startDelay: 300,
+            backDelay: 2000,
+            loop: true,
+            showCursor: false
+        });
+    }
+
+    // Count-up animation for stats
+    const countAnimate = (el) => {
+        const target = parseInt(el.getAttribute('data-count'));
+        if (isNaN(target) || target === 0) return;
+        const duration = 2000;
+        const start = 0;
+        const increment = (target - start) / (duration / 16);
+        let current = start;
+
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            el.textContent = Math.floor(current);
+        }, 16);
+    };
+
+    // Trigger count-up when stats are in view
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                document.querySelectorAll('.stat-number').forEach(el => countAnimate(el));
+                statsObserver.disconnect();
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) statsObserver.observe(heroStats);
+
+    // Animate progress bars when in view
+    const progressBars = document.querySelectorAll('.progress-bar');
+    const progressObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target;
+                bar.style.width = bar.getAttribute('data-progress') + '%';
+                progressObserver.unobserve(bar);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    progressBars.forEach(bar => progressObserver.observe(bar));
+
+    // Initialize VanillaTilt
+    if (typeof VanillaTilt !== 'undefined') {
+        VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+            max: 10,
+            speed: 400,
+            perspective: 1000,
+            transition: true,
+            glare: true,
+            'max-glare': 0.2
+        });
+    }
+});
+</script>
+{% endblock %}

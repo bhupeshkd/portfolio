@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contact | {{ site_profile.name|default:'Bhupesh Dewangan' }}{% endblock %}
+
+{% block extra_css %}
+<style>
+@media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr !important; gap: 30px !important; }
+    .contact-section { padding: 40px 16px 80px !important; overflow: hidden; }
+    .contact-form-wrap { min-width: 0; }
+    .form-3d-card { max-width: 100%; overflow: hidden; }
+    .form-body { padding: 25px 20px !important; }
+    .form-input { font-size: 0.9rem !important; padding: 12px 14px !important; }
+    .contact-hero-content h1 { font-size: 2.3rem !important; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- ========== CONTACT HERO ========== -->
+<section class="contact-hero">
+    <div class="hero-background">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="grid-overlay"></div>
+    </div>
+    <div class="contact-hero-content" data-aos="fade-up">
+        <span class="section-tag">// let's connect</span>
+        <h1 class="section-title">Get In <span class="gradient-text">Touch</span></h1>
+        <p>Have a project idea or job opportunity? Let's talk about it!</p>
+    </div>
+</section>
+
+<!-- ========== CONTACT SECTION ========== -->
+<section class="contact-section">
+    <div class="contact-grid">
+        <!-- Contact Info Cards -->
+        <div class="contact-info-side" data-aos="fade-right">
+            {% if profile %}
+            <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="info-icon"><i class="fas fa-user"></i></div>
+                <h3>Who I Am</h3>
+                <p class="info-large">{{ profile.name }}</p>
+                <p>{{ profile.title }}</p>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                <h3>Email</h3>
+                <p class="info-large"><a href="mailto:{{ profile.email }}">{{ profile.email }}</a></p>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Location</h3>
+                <p>{{ profile.location|default:'Chhattisgarh, India' }}</p>
+            </div>
+            {% else %}
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-user"></i></div>
+                <h3>Who I Am</h3>
+                <p class="info-large">Bhupesh Dewangan</p>
+                <p>Python & Django Developer</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                <h3>Email</h3>
+                <p class="info-large"><a href="mailto:bhupeshdeww@gmail.com">bhupeshdeww@gmail.com</a></p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Location</h3>
+                <p>Chhattisgarh, India</p>
+            </div>
+            {% endif %}
+
+            <div class="info-card social-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="info-icon"><i class="fas fa-share-alt"></i></div>
+                <h3>Follow Me</h3>
+                <div class="contact-socials">
+                    {% if profile.github_url %}<a href="{{ profile.github_url }}" target="_blank" rel="noopener" class="social-3d"><i class="fab fa-github"></i></a>{% endif %}
+                    {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" rel="noopener" class="social-3d"><i class="fab fa-linkedin-in"></i></a>{% endif %}
+                    {% if profile.twitter_url %}<a href="{{ profile.twitter_url }}" target="_blank" rel="noopener" class="social-3d"><i class="fab fa-twitter"></i></a>{% endif %}
+                    {% if profile.email %}<a href="mailto:{{ profile.email }}" class="social-3d"><i class="fas fa-envelope"></i></a>{% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-wrap" data-aos="fade-left" data-aos-delay="200">
+            <div class="form-3d-card" data-tilt data-tilt-max="5">
+                <div class="form-header">
+                    <span class="window-dot red"></span>
+                    <span class="window-dot yellow"></span>
+                    <span class="window-dot green"></span>
+                    <span class="window-title">send_message.py</span>
+                </div>
+                <div class="form-body">
+                    <form method="post" action="{% url 'contact' %}" id="contact-form" novalidate>
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_name"><i class="fas fa-user"></i> Your Name</label>
+                            <input type="text" name="name" id="id_name" class="form-input" placeholder="John Doe" required>
+                            <span class="input-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_email"><i class="fas fa-envelope"></i> Your Email</label>
+                            <input type="email" name="email" id="id_email" class="form-input" placeholder="john@example.com" required>
+                            <span class="input-error"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_message"><i class="fas fa-comment"></i> Your Message</label>
+                            <textarea name="message" id="id_message" class="form-input textarea-input" placeholder="Tell me about your project or opportunity..." rows="6" required></textarea>
+                            <span class="input-error"></span>
+                        </div>
+                        <div class="form-character-counter">
+                            <span id="charCount">0</span> / 2000
+                        </div>
+                        <button type="submit" class="btn-3d primary-btn submit-btn" id="submitBtn">
+                            <span class="btn-front"><i class="fas fa-paper-plane"></i> Send Message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== RESPONSE TIME ========== -->
+<section class="response-time" data-aos="zoom-in">
+    <div class="response-card">
+        <i class="fas fa-bolt response-icon"></i>
+        <h3>Fast Response</h3>
+        <p>I usually respond within <strong>24 hours</strong>. Your message goes directly to my inbox.</p>
+    </div>
+    <div class="response-card" data-aos="zoom-in" data-aos-delay="100">
+        <i class="fas fa-lock response-icon"></i>
+        <h3>100% Confidential</h3>
+        <p>Your information and project details are always kept <strong>private</strong>.</p>
+    </div>
+    <div class="response-card" data-aos="zoom-in" data-aos-delay="200">
+        <i class="fas fa-coffee response-icon"></i>
+        <h3>Let's Collaborate</h3>
+        <p>Open to <strong>freelance projects</strong>, internships, and full-time roles.</p>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contact-form');
+    const textarea = document.getElementById('id_message');
+    const charCount = document.getElementById('charCount');
+
+    // Character counter
+    if (textarea && charCount) {
+        textarea.addEventListener('input', function () {
+            charCount.textContent = this.value.length;
+            if (this.value.length > 1900) {
+                charCount.style.color = '#f59e0b';
+            } else {
+                charCount.style.color = '#94a3b8';
+            }
+        });
+    }
+
+    // Form validation with animations
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            let valid = true;
+            const name = document.getElementById('id_name');
+            const email = document.getElementById('id_email');
+            const message = document.getElementById('id_message');
+
+            // Name validation
+            if (name.value.trim().length < 2) {
+                name.classList.add('input-error-state');
+                name.nextElementSibling.textContent = 'Please enter your full name';
+                valid = false;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                email.classList.add('input-error-state');
+                email.nextElementSibling.textContent = 'Please enter a valid email';
+                valid = false;
+            }
+
+            // Message validation
+            if (message.value.trim().length < 10) {
+                message.classList.add('input-error-state');
+                message.nextElementSibling.textContent = 'Message must be at least 10 characters';
+                valid = false;
+            }
+
+            if (!valid) {
+                e.preventDefault();
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.classList.add('shake-animation');
+                setTimeout(() => submitBtn.classList.remove('shake-animation'), 500);
+            }
+        });
+
+        // Clear error state on input
+        form.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', function () {
+                this.classList.remove('input-error-state');
+                this.nextElementSibling.textContent = '';
+            });
+        });
+    }
+
+    // Enable tilt
+    if (typeof VanillaTilt !== 'undefined') {
+        VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+            max: 5,
+            speed: 300,
+            perspective: 1500
+        });
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Projects | {{ site_profile.name|default:'Bhupesh Dewangan' }}{% endblock %}
+
+{% block content %}
+
+<!-- ========== PROJECTS HEADER ========== -->
+<section class="projects-hero">
+    <div class="hero-background">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="grid-overlay"></div>
+    </div>
+    <div class="projects-hero-content" data-aos="fade-up">
+        <span class="section-tag">// my work</span>
+        <h1 class="section-title">My <span class="gradient-text">Projects</span></h1>
+        <p>Here's what I've been building. Each project represents a unique challenge and learning experience.</p>
+    </div>
+</section>
+
+<!-- ========== PROJECT FILTERS ========== -->
+<section class="projects-section">
+    <div class="filter-bar" data-aos="fade-up">
+        <button class="filter-btn active" data-filter="all"><i class="fas fa-th-large"></i> All</button>
+        <button class="filter-btn" data-filter="web"><i class="fas fa-globe"></i> Web</button>
+        <button class="filter-btn" data-filter="app"><i class="fas fa-mobile-alt"></i> Apps</button>
+        <button class="filter-btn" data-filter="script"><i class="fas fa-terminal"></i> Scripts</button>
+        <button class="filter-btn" data-filter="other"><i class="fas fa-cube"></i> Other</button>
+    </div>
+
+    <div class="projects-masonry">
+        {% for project in projects %}
+        <article class="project-card" data-category="{{ project.category }}" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:50 }}">
+            <div class="project-card-inner" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.2">
+                <div class="project-image-wrap">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy">
+                    {% else %}
+                    <div class="project-placeholder">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    {% endif %}
+                    <div class="project-overlay">
+                        <div class="project-actions">
+                            {% if project.live_link %}
+                            <a href="{{ project.live_link }}" target="_blank" rel="noopener" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                            {% endif %}
+                            {% if project.github_link %}
+                            <a href="{{ project.github_link }}" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+                            {% endif %}
+                            <a href="{% url 'project_detail' project.slug %}" title="Details"><i class="fas fa-eye"></i></a>
+                        </div>
+                    </div>
+                    {% if project.featured %}
+                    <span class="featured-badge">★ Featured</span>
+                    {% endif %}
+                </div>
+                <div class="project-body">
+                    <span class="project-category">{{ project.get_category_display }}</span>
+                    <h3 class="project-title">{{ project.title }}</h3>
+                    <p class="project-desc">{{ project.description|truncatechars:100 }}</p>
+                    <div class="project-tech">
+                        {% for tech in project.technologies.all|slice:":5" %}
+                        <span class="tech-chip"><i class="{{ tech.icon|default:'fas fa-code' }}"></i> {{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </article>
+        {% empty %}
+        <div class="no-projects">
+            <div class="empty-state" data-aos="zoom-in">
+                <i class="fas fa-code-branch"></i>
+                <h3>No projects yet</h3>
+                <p>Check back soon — projects are on the way!</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Project filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            // Update active state
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const filter = this.getAttribute('data-filter');
+
+            // Filter projects
+            projectCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                if (filter === 'all' || category === filter) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 350);
+                }
+            });
+        });
+    });
+
+    // Initialize tilt effect
+    if (typeof VanillaTilt !== 'undefined') {
+        VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+            max: 10,
+            speed: 400,
+            perspective: 1200,
+            transition: true,
+            glare: true,
+            'max-glare': 0.25
+        });
+    }
+});
+</script>
+{% endblock %}
