@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.core.validators import MinValueValidator, MaxValueValidator
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
 
 
 class Profile(models.Model):
@@ -163,7 +164,10 @@ class Achievement(models.Model):
 
 class Resume(models.Model):
     title = models.CharField(max_length=100, default='My Resume')
-    file = models.FileField(upload_to='resumes/')
+    file = models.FileField(
+        upload_to='resumes/',
+        storage=RawMediaCloudinaryStorage()  # PDF/Raw files ke liye safe storage driver
+    )
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
