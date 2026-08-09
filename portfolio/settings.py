@@ -123,7 +123,7 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
-# Django 4.2+ / Django 6.0 Unified STORAGES setup
+# Unified STORAGES setup (Django 4.2+)
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
@@ -132,6 +132,10 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+# Legacy Compatibility Settings (Required for django-cloudinary-storage internal checks)
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
