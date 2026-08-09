@@ -20,22 +20,22 @@ ALLOWED_HOSTS = ['.vercel.app', 'now.sh', 'localhost', '127.0.0.1', '*']
 
 
 # Application definition
-# IMPORTANT: cloudinary_storage MUST come before django.contrib.staticfiles
+# Static files MUST be served by WhiteNoise on Vercel. 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',          # Must be above staticfiles
-    'django.contrib.staticfiles',
-    'cloudinary',                  # Cloudinary core app
+    'django.contrib.staticfiles',  # Keep standard staticfiles ahead
+    'cloudinary_storage',          # Used strictly for user uploaded media files
+    'cloudinary',
     'main',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise Middleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise serves static CSS/JS
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -121,7 +121,7 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
-# Cloudinary Configuration
+# Cloudinary Configuration (For User Media Storage)
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'yuhh3avl'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
@@ -129,17 +129,19 @@ CLOUDINARY_STORAGE = {
 }
 
 # Unified STORAGES setup for Vercel
+# Static files -> Compressed WhiteNoise Storage
+# Media files  -> Cloudinary Storage
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 
 # Legacy Compatibility Settings
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 
