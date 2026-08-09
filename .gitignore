@@ -24,7 +24,14 @@ wheels/
 *.log
 db.sqlite3
 db.sqlite3-journal
+
+# Collected Static Files Build Directories for Vercel
 /staticfiles/
+/staticfiles_build/
+
+# Do NOT ignore source static files!
+!static/
+!static/**
 
 # Virtual environments
 venv/
