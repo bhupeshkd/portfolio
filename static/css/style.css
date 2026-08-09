@@ -2613,6 +2613,14 @@ html[data-theme="dark"] .icon-django i {
     gap: 8px;
 }
 
+.detail-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
 /* ========== Footer ========== */
 .modern-footer {
     background: var(--bg-secondary);

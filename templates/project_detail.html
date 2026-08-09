@@ -18,6 +18,18 @@
             <span class="tech-tag">{{ tech.name }}</span>
             {% endfor %}
         </div>
+        <div class="detail-links">
+            {% if project.github_link %}
+            <a href="{{ project.github_link }}" target="_blank" rel="noopener" class="btn-3d secondary-btn">
+                <span class="btn-front"><i class="fab fa-github"></i> View Code</span>
+            </a>
+            {% endif %}
+            {% if project.live_link %}
+            <a href="{{ project.live_link }}" target="_blank" rel="noopener" class="btn-3d primary-btn">
+                <span class="btn-front"><i class="fas fa-external-link-alt"></i> Live Demo</span>
+            </a>
+            {% endif %}
+        </div>
     </div>
 </section>
 {% endblock %}
