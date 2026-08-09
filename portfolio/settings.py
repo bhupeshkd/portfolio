@@ -11,26 +11,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
-SECRET_KEY = 'django-insecure-1&ay(rg@l0v8fvu^3f=et74+ct_f&kha*^1@=%osi5b*pxq+dx'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-1&ay(rg@l0v8fvu^3f=et74+ct_f&kha*^1@=%osi5b*pxq+dx')
 
-# Production me Vercel par isse True ya Environment variable se handle kar sakte hain
-DEBUG = True
+# DEBUG status handling via environment variable or default True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['.vercel.app', 'now.sh', 'localhost', '127.0.0.1', '*']
 
 
 # Application definition
-
+# IMPORTANT: cloudinary_storage MUST come before django.contrib.staticfiles
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',          # Must be above staticfiles
     'django.contrib.staticfiles',
+    'cloudinary',                  # Cloudinary core app
     'main',
-    'cloudinary_storage',
-    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +65,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
+
 # Database Setup (Neon PostgreSQL on Vercel, SQLite on Local)
 if os.environ.get('DATABASE_URL'):
     DATABASES = {
@@ -82,32 +83,6 @@ else:
         }
     }
 
-
-# # Cloudinary configuration
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-#     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-#     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
-# }
-
-# Cloudinary Storage Configuration
-STORAGES = {
-    "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'yuhh3avl'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
-}
-
-# Tell Django to use Cloudinary for uploaded media files
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -139,20 +114,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images) Setup
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles_build'
 
-# Vercel deployment ke liye static files build path:
-STATIC_ROOT = BASE_DIR / 'staticfiles_build' / 'static'
+# Cloudinary Configuration
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'yuhh3avl'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
 
-# Django 6.0+ compatible STORAGES setup (WhiteNoise integration)
+# Django 4.2+ / Django 6.0 Unified STORAGES setup
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

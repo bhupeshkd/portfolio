@@ -166,7 +166,7 @@ class Resume(models.Model):
     title = models.CharField(max_length=100, default='My Resume')
     file = models.FileField(
         upload_to='resumes/',
-        storage=RawMediaCloudinaryStorage()  # PDF/Raw files ke liye safe storage driver
+        storage=RawMediaCloudinaryStorage()  # Safe storage driver for PDF files
     )
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
