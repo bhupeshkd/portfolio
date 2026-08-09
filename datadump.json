@@ -1,0 +1,869 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$ezaSe2nDMTHPgOmYcXZRnD$GWMEVcInrxg4ClmVYmQj5zWz/45ZvdHjBQN0DfuSG+8=",
+        "last_login": "2026-02-06T10:04:47.099Z",
+        "is_superuser": true,
+        "username": "bhupesh",
+        "first_name": "",
+        "last_name": "",
+        "email": "bhupeshdeww@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-02-06T10:03:52.218Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$8Hdrp8D75eiycacJnbQBvv$CJr9MRpadLABgGVCV+4k6WYm4iJwgBhlTNNfuxjO5fw=",
+        "last_login": "2026-08-08T23:02:39.036Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "bhupeshdeww@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-08-08T22:56:57.282Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "jbxu9y9b6delpxev7cvu188b5864epl0",
+    "fields": {
+        "session_data": ".eJxVjMsOgjAQAP9lz6ZpKfTB0bvfQLbbXUFNm1A4Gf_dkHDQ68xk3jDhvs3T3nidlgwjdHD5ZQnpyeUQ-YHlXhXVsq1LUkeiTtvUrWZ-Xc_2bzBjm2GEPlrptBlEczAi0WtJ3ghKF9ClSNZm6x3nIQ7OeM4UmUmCRmHq-5Tg8wXqvzjX:1wsq3r:JsINfEeSnaEAU6OTVTMmtn0PCMmfPOi_BgoJwnPu_9o",
+        "expire_date": "2026-08-22T23:02:39.047Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "ymkr60i6q4xhemu9eeskl088md5oz1h4",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQRf-FtSFToDxcuvcbyMBMpWogKe3K-O_apAvd3nPOfYmI21ri1nmJM4mzGMTpd0uYH1x3QHestyZzq-syJ7kr8qBdXhvx83K4fwcFe_nWwbDPAFYRDRq8BlY6gU5BhTB65TykQGhHZDYE2RsE6yhMQEk7nJR4fwC_Rzds:1voIhj:xWTLbr9LfaLPeq_i8s-J0TfDM0IrI_yrLnHHsHROJa0",
+        "expire_date": "2026-02-20T10:04:47.111Z"
+    }
+},
+{
+    "model": "main.profile",
+    "pk": 1,
+    "fields": {
+        "name": "Bhupesh Dewangan",
+        "title": "Python / Django Developer",
+        "profile_picture": "",
+        "about_text": "MCA graduate and Python/Django developer. Proficient in Django, Django Channels, Celery, REST APIs, MySQL.",
+        "email": "bhupeshdeww@gmail.com",
+        "phone": "+91 7000134980",
+        "location": "Bhatapara, C.G. | Open to Relocation",
+        "github_url": "https://github.com/bhupeshkd",
+        "linkedin_url": "https://linkedin.com/in/bhupesh-dew",
+        "twitter_url": "https://x.com/bhupeshdew",
+        "available": true,
+        "available_text": "Open to work",
+        "created_at": "2026-08-08T22:56:57.821Z",
+        "updated_at": "2026-08-08T23:39:47.338Z"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 1,
+    "fields": {
+        "name": "Python",
+        "icon": "fab fa-python"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 2,
+    "fields": {
+        "name": "Django",
+        "icon": "fab fa-python"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 3,
+    "fields": {
+        "name": "DRF",
+        "icon": "fas fa-server"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 4,
+    "fields": {
+        "name": "JavaScript",
+        "icon": "fab fa-js-square"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 5,
+    "fields": {
+        "name": "HTML",
+        "icon": "fab fa-html5"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 6,
+    "fields": {
+        "name": "CSS",
+        "icon": "fab fa-css3-alt"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 7,
+    "fields": {
+        "name": "SQL",
+        "icon": "fas fa-database"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 8,
+    "fields": {
+        "name": "MySQL",
+        "icon": "fas fa-database"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 9,
+    "fields": {
+        "name": "SQLite",
+        "icon": "fas fa-database"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 10,
+    "fields": {
+        "name": "Git",
+        "icon": "fab fa-git-alt"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 11,
+    "fields": {
+        "name": "GitHub",
+        "icon": "fab fa-github"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 12,
+    "fields": {
+        "name": "Docker",
+        "icon": "fab fa-docker"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 13,
+    "fields": {
+        "name": "REST APIs",
+        "icon": "fas fa-plug"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 14,
+    "fields": {
+        "name": "React",
+        "icon": "fab fa-react"
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 15,
+    "fields": {
+        "name": "Django Channels",
+        "icon": ""
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 16,
+    "fields": {
+        "name": "Celery",
+        "icon": ""
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 17,
+    "fields": {
+        "name": "WebSockets",
+        "icon": ""
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 18,
+    "fields": {
+        "name": "OpenCV",
+        "icon": ""
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 19,
+    "fields": {
+        "name": "Pillow",
+        "icon": ""
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 20,
+    "fields": {
+        "name": "Tkinter",
+        "icon": ""
+    }
+},
+{
+    "model": "main.technology",
+    "pk": 21,
+    "fields": {
+        "name": "AI/ML",
+        "icon": ""
+    }
+},
+{
+    "model": "main.project",
+    "pk": 4,
+    "fields": {
+        "title": "ChatterBox - Real-Time Social Media Platform",
+        "slug": "chatterbox-real-time-social-media-platform",
+        "description": "Built a full-featured social platform with real-time chat, posts, and a follow system. Implemented Django Channels, WebSockets, and Celery for async communication and background tasks. Delivered real-time notifications, boosting user engagement.",
+        "category": "web",
+        "github_link": "",
+        "live_link": "",
+        "image": "",
+        "featured": true,
+        "created_at": "2026-08-08T23:40:09.736Z",
+        "updated_at": "2026-08-08T23:40:09.736Z",
+        "technologies": [
+            16,
+            2,
+            15,
+            8,
+            17
+        ]
+    }
+},
+{
+    "model": "main.project",
+    "pk": 5,
+    "fields": {
+        "title": "Face Recognition Attendance System",
+        "slug": "face-recognition-attendance-system",
+        "description": "Built an automated AI-powered attendance system using real-time face recognition. Desktop application with Tkinter GUI for live camera feed, attendance logs, and reports.",
+        "category": "web",
+        "github_link": "",
+        "live_link": "",
+        "image": "",
+        "featured": true,
+        "created_at": "2026-08-08T23:40:09.791Z",
+        "updated_at": "2026-08-08T23:57:54.625Z",
+        "technologies": [
+            8,
+            18,
+            19,
+            1,
+            20
+        ]
+    }
+},
+{
+    "model": "main.project",
+    "pk": 6,
+    "fields": {
+        "title": "Collaborative Study Portal",
+        "slug": "collaborative-study-portal",
+        "description": "P2P learning platform for sharing study materials and academic collaboration. AI-assisted content suggestions for better resource discoverability. Clean responsive UI.",
+        "category": "web",
+        "github_link": "",
+        "live_link": "",
+        "image": "",
+        "featured": true,
+        "created_at": "2026-08-08T23:40:09.859Z",
+        "updated_at": "2026-08-08T23:40:09.860Z",
+        "technologies": [
+            6,
+            2,
+            5,
+            4,
+            9
+        ]
+    }
+},
+{
+    "model": "main.project",
+    "pk": 7,
+    "fields": {
+        "title": "AI Agent Dashboard",
+        "slug": "ai-agent-dashboard",
+        "description": "Built an intelligent AI agent dashboard for monitoring and managing autonomous AI agents. Features real-time task tracking, agent performance metrics, and conversational AI interface.",
+        "category": "web",
+        "github_link": "",
+        "live_link": "",
+        "image": "",
+        "featured": true,
+        "created_at": "2026-08-08T23:57:54.641Z",
+        "updated_at": "2026-08-08T23:57:54.641Z",
+        "technologies": [
+            21,
+            2,
+            1,
+            13
+        ]
+    }
+},
+{
+    "model": "main.project",
+    "pk": 8,
+    "fields": {
+        "title": "Weather Software",
+        "slug": "weather-software",
+        "description": "Developed a weather forecasting application with real-time data retrieval, interactive visualizations, and location-based forecasts using external APIs.",
+        "category": "web",
+        "github_link": "",
+        "live_link": "",
+        "image": "",
+        "featured": true,
+        "created_at": "2026-08-08T23:57:54.670Z",
+        "updated_at": "2026-08-08T23:57:54.670Z",
+        "technologies": [
+            6,
+            5,
+            4,
+            1,
+            13
+        ]
+    }
+},
+{
+    "model": "main.project",
+    "pk": 9,
+    "fields": {
+        "title": "AI CRM Automation",
+        "slug": "ai-crm-automation",
+        "description": "Built an AI-powered CRM automation system that streamlines customer relationship management with intelligent lead scoring, automated follow-ups, and analytics.",
+        "category": "web",
+        "github_link": "",
+        "live_link": "",
+        "image": "",
+        "featured": true,
+        "created_at": "2026-08-08T23:57:54.685Z",
+        "updated_at": "2026-08-08T23:57:54.685Z",
+        "technologies": [
+            2,
+            8,
+            1,
+            13
+        ]
+    }
+},
+{
+    "model": "main.project",
+    "pk": 10,
+    "fields": {
+        "title": "Portfolio Website",
+        "slug": "portfolio-website",
+        "description": "Modern portfolio website built with Django featuring dark/light theme, 3D particle effects, responsive design, admin panel, and dynamic content management.",
+        "category": "web",
+        "github_link": "",
+        "live_link": "",
+        "image": "",
+        "featured": true,
+        "created_at": "2026-08-08T23:57:54.701Z",
+        "updated_at": "2026-08-08T23:57:54.701Z",
+        "technologies": [
+            6,
+            2,
+            5,
+            4,
+            9
+        ]
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 15,
+    "fields": {
+        "name": "Python",
+        "category": "backend",
+        "icon": "fab fa-python",
+        "percentage": 92,
+        "display_order": 0,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 16,
+    "fields": {
+        "name": "C/C++",
+        "category": "backend",
+        "icon": "fas fa-code",
+        "percentage": 55,
+        "display_order": 1,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 17,
+    "fields": {
+        "name": "Django",
+        "category": "backend",
+        "icon": "fab fa-python",
+        "percentage": 90,
+        "display_order": 2,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 18,
+    "fields": {
+        "name": "Django REST Framework",
+        "category": "backend",
+        "icon": "fas fa-server",
+        "percentage": 85,
+        "display_order": 3,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 19,
+    "fields": {
+        "name": "Django Channels",
+        "category": "backend",
+        "icon": "fas fa-comments",
+        "percentage": 80,
+        "display_order": 4,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 20,
+    "fields": {
+        "name": "Flask",
+        "category": "backend",
+        "icon": "fas fa-flask",
+        "percentage": 70,
+        "display_order": 5,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 21,
+    "fields": {
+        "name": "Celery",
+        "category": "backend",
+        "icon": "fas fa-tasks",
+        "percentage": 78,
+        "display_order": 6,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 22,
+    "fields": {
+        "name": "WebSockets",
+        "category": "backend",
+        "icon": "fas fa-plug",
+        "percentage": 80,
+        "display_order": 7,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 23,
+    "fields": {
+        "name": "Redis",
+        "category": "backend",
+        "icon": "fas fa-database",
+        "percentage": 60,
+        "display_order": 8,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 24,
+    "fields": {
+        "name": "MySQL",
+        "category": "database",
+        "icon": "fas fa-database",
+        "percentage": 85,
+        "display_order": 9,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 25,
+    "fields": {
+        "name": "SQLite",
+        "category": "database",
+        "icon": "fas fa-database",
+        "percentage": 90,
+        "display_order": 10,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 26,
+    "fields": {
+        "name": "PostgreSQL",
+        "category": "database",
+        "icon": "fas fa-database",
+        "percentage": 65,
+        "display_order": 11,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 27,
+    "fields": {
+        "name": "HTML",
+        "category": "frontend",
+        "icon": "fab fa-html5",
+        "percentage": 90,
+        "display_order": 12,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 28,
+    "fields": {
+        "name": "CSS",
+        "category": "frontend",
+        "icon": "fab fa-css3-alt",
+        "percentage": 80,
+        "display_order": 13,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 29,
+    "fields": {
+        "name": "JavaScript",
+        "category": "frontend",
+        "icon": "fab fa-js-square",
+        "percentage": 70,
+        "display_order": 14,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 30,
+    "fields": {
+        "name": "Git & GitHub",
+        "category": "tools",
+        "icon": "fab fa-git-alt",
+        "percentage": 85,
+        "display_order": 15,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 31,
+    "fields": {
+        "name": "VS Code",
+        "category": "tools",
+        "icon": "fas fa-code",
+        "percentage": 90,
+        "display_order": 16,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 32,
+    "fields": {
+        "name": "Postman",
+        "category": "tools",
+        "icon": "fas fa-envelope-open-text",
+        "percentage": 80,
+        "display_order": 17,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 33,
+    "fields": {
+        "name": "Linux",
+        "category": "tools",
+        "icon": "fab fa-linux",
+        "percentage": 65,
+        "display_order": 18,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 34,
+    "fields": {
+        "name": "OpenCV",
+        "category": "tools",
+        "icon": "fas fa-eye",
+        "percentage": 75,
+        "display_order": 19,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 35,
+    "fields": {
+        "name": "Pillow",
+        "category": "tools",
+        "icon": "fas fa-image",
+        "percentage": 70,
+        "display_order": 20,
+        "is_active": true
+    }
+},
+{
+    "model": "main.skill",
+    "pk": 36,
+    "fields": {
+        "name": "Tkinter",
+        "category": "tools",
+        "icon": "fas fa-window-maximize",
+        "percentage": 70,
+        "display_order": 21,
+        "is_active": true
+    }
+},
+{
+    "model": "main.experience",
+    "pk": 1,
+    "fields": {
+        "position": "Python/Django Developer (Freelance)",
+        "company": "Self-employed",
+        "start_date": "2024 - Present",
+        "description": "Building scalable web applications and REST APIs for clients. Handling complete software lifecycle from requirements to deployment.",
+        "technologies": "Python, Django, DRF, MySQL, Git",
+        "display_order": 0,
+        "is_active": true
+    }
+},
+{
+    "model": "main.experience",
+    "pk": 2,
+    "fields": {
+        "position": "Software Developer (Intern)",
+        "company": "TechoNet",
+        "start_date": "2024",
+        "description": "Developed and maintained web applications using Django. Collaborated with cross-functional teams to ship features.",
+        "technologies": "Python, Django, JavaScript, HTML, CSS",
+        "display_order": 0,
+        "is_active": true
+    }
+},
+{
+    "model": "main.experience",
+    "pk": 3,
+    "fields": {
+        "position": "Self-Taught Programmer",
+        "company": "Personal Learning Journey",
+        "start_date": "2020 - 2023",
+        "description": "Started learning programming with Python. Built numerous personal projects to master backend development.",
+        "technologies": "Python, SQL, Git, Linux",
+        "display_order": 0,
+        "is_active": true
+    }
+},
+{
+    "model": "main.education",
+    "pk": 3,
+    "fields": {
+        "degree": "Master of Computer Applications (MCA)",
+        "institution": "Chhattisgarh Swami Vivekanand Technical University, Bhilai",
+        "start_date": "2022 - 2024",
+        "description": "Completed MCA with 75%.",
+        "display_order": 0,
+        "is_active": true
+    }
+},
+{
+    "model": "main.education",
+    "pk": 4,
+    "fields": {
+        "degree": "B.Sc. in Computer Science",
+        "institution": "Atal Bihari Vajpayee University, Bilaspur",
+        "start_date": "2019 - 2022",
+        "description": "Completed B.Sc. in Computer Science with 78.2%.",
+        "display_order": 1,
+        "is_active": true
+    }
+},
+{
+    "model": "main.achievement",
+    "pk": 4,
+    "fields": {
+        "title": "Advanced Python",
+        "description": "Certification from Programming Hub",
+        "icon": "fab fa-python",
+        "display_order": 0,
+        "is_active": true
+    }
+},
+{
+    "model": "main.achievement",
+    "pk": 5,
+    "fields": {
+        "title": "Python for Data Science",
+        "description": "Certification from IBM",
+        "icon": "fas fa-chart-line",
+        "display_order": 0,
+        "is_active": true
+    }
+},
+{
+    "model": "main.achievement",
+    "pk": 6,
+    "fields": {
+        "title": "Prompting & Generative AI",
+        "description": "Certification from LinkedIn Learning",
+        "icon": "fas fa-robot",
+        "display_order": 0,
+        "is_active": true
+    }
+},
+{
+    "model": "main.achievement",
+    "pk": 7,
+    "fields": {
+        "title": "Django Certification",
+        "description": "Certification from Programming Hub",
+        "icon": "fab fa-python",
+        "display_order": 0,
+        "is_active": true
+    }
+},
+{
+    "model": "main.resume",
+    "pk": 1,
+    "fields": {
+        "title": "My Resume",
+        "file": "resumes/Bhupesh_Dewangan_Resume_WMpKz8i.pdf",
+        "uploaded_at": "2026-02-06T10:06:00.220Z"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2026-02-06T10:06:00.225Z",
+        "user": [
+            "bhupesh"
+        ],
+        "content_type": [
+            "main",
+            "resume"
+        ],
+        "object_id": "1",
+        "object_repr": "My Resume",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2026-08-08T23:07:59.610Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "main",
+            "education"
+        ],
+        "object_id": "2",
+        "object_repr": "Bachelor of Science (C.S.) - Atal Vihari Bajpayee University , Bilaspur",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Degree\", \"Institution\", \"Start date\", \"Description\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2026-08-08T23:08:49.632Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "main",
+            "education"
+        ],
+        "object_id": "1",
+        "object_repr": "Masters of Computer Application (M.C.A.) - CSVTU",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Degree\", \"Institution\", \"Start date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2026-08-08T23:12:09.269Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "main",
+            "experience"
+        ],
+        "object_id": "2",
+        "object_repr": "Software Developer (Intern) - 2024",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Position\", \"Company\", \"Start date\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2026-08-08T23:13:13.006Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "main",
+            "profile"
+        ],
+        "object_id": "1",
+        "object_repr": "Bhupesh Dewangan",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Phone\", \"Github url\"]}}]"
+    }
+}
+]
