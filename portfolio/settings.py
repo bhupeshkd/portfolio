@@ -8,9 +8,9 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-1&ay(rg@l0v8fvu^3f=et74+ct_f&kha*^1@=%osi5b*pxq+dx')
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = ['.vercel.app', 'now.sh', 'localhost', '127.0.0.1', '*']
 
@@ -35,7 +35,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'main.middleware.Custom404Middleware',
 ]
 
 ROOT_URLCONF = 'portfolio.urls'
@@ -101,7 +100,7 @@ STORAGES = {
 }
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'yuhh3avl'),
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
@@ -125,4 +124,4 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_HSTS_SECONDS = 0
     SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-    SECURE_HSTS_PRELOAD = Falses
+    SECURE_HSTS_PRELOAD = False
